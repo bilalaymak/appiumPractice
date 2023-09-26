@@ -1,6 +1,6 @@
 package testNGtests;
 
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.By;
@@ -34,7 +34,7 @@ public class practice01 {
         capabilities.setCapability("appPackage","com.touchboarder.android.api.demos");
         capabilities.setCapability("appActivity","com.touchboarder.androidapidemos.MainActivity");
 
-        AndroidDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
+        AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
 
         driver.findElement(By.xpath("//android.widget.TextView[@text='Support Design Demo: Cheesesquare']")).click();
 
@@ -46,6 +46,10 @@ public class practice01 {
     @Test
     public void test02(){
         Driver.getAppiumDriver();
+
+       Driver.getAppiumDriver().findElement(By.xpath("//android.widget.TextView[@text='Support Design Demo: Cheesesquare']")).click();
+        assertEquals( Driver.getAppiumDriver().findElement(By.xpath("//android.widget.TextView[@text='Support Design Demo: Cheesesquare']")).getText(),
+                "Support Design Demo: Cheesesquare");
 
 
 

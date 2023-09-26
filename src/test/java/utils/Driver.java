@@ -2,10 +2,11 @@ package utils;
 
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
@@ -13,12 +14,13 @@ import java.net.URL;
 
 
 public class Driver {
-    private static AppiumDriver<MobileElement> appiumDriver;
+    private static AppiumDriver appiumDriver;
+
 
     public static AppiumDriver getAppiumDriver()  {
         URL appiumServerURL = null;
         try {
-            appiumServerURL = new URL("http:127.0.0.1:4723/wd/hub");
+            appiumServerURL = new URL("http://127.0.0.1:4723/wd/hub");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -40,12 +42,14 @@ public class Driver {
                 desiredCapabilities.setCapability("appActivity","");
                 assert appiumServerURL != null;
                 appiumDriver = new AndroidDriver(appiumServerURL,desiredCapabilities);
-            } else if (ConfigReader.getProperty("platformName").equals("iOS")) {
+            }
+            else if (ConfigReader.getProperty("platformName").equals("iOS")) {
                 //if you do not provide app path so you should use "bundleId"
 //                desiredCapabilities.setCapability("bundleId",ConfigReader.getProperty("iosBundleId"));
                 assert appiumServerURL != null;
                 appiumDriver = new IOSDriver(appiumServerURL,desiredCapabilities);
-            } else {
+            }
+        else {
                 throw new UnsupportedOperationException("Invalid Platform Name " + ConfigReader.getProperty("platformName"));
             }
         }

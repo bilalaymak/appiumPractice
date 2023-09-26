@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 
@@ -83,7 +84,7 @@ public class ReusableMethods {
     }
 
     public static void waitToBeVisible(MobileElement element, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getAppiumDriver(), timeout);
+        WebDriverWait wait = new WebDriverWait(Driver.getAppiumDriver(),  timeout);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
